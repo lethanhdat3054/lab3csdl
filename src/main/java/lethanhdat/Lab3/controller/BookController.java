@@ -6,10 +6,7 @@ import lethanhdat.Lab3.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,6 +32,18 @@ public class BookController {
     @PostMapping("/add")
     public String addBook(@ModelAttribute("book") Book book) {
         bookService.addBook(book);
+        return "redirect:/books";
+    }
+    @GetMapping({"/delete/{id}"})
+    public String DeleteBook(@PathVariable("id") Long id) {
+        Book book = bookService.getBookById(id);
+        if (book != null) {
+            // Xoá Book dựa vào Book có Id vừa tìm được
+            bookService.deleteBook(id);
+            System.out.println("Book đã được xóa");
+        } else {
+            System.out.println("Book chưa được xóa");
+        }
         return "redirect:/books";
     }
 }
