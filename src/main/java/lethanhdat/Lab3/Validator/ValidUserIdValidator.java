@@ -8,9 +8,10 @@ import lethanhdat.Lab3.Validator.annotation.ValidUserId;
 
 public class ValidUserIdValidator implements ConstraintValidator<ValidUserId, User> {
     @Override
-    public boolean isValid(User user, ConstraintValidatorContext context){
-        if(user==null){
+    public boolean isValid(User user, ConstraintValidatorContext context) {
+        if (user == null) {
             return true;
         }
-        return user.getId()!=null;
+        return user.getId() != null;
     }
+}
